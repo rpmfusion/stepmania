@@ -37,6 +37,10 @@ Patch3:        https://aur.archlinux.org/cgit/aur.git/plain/ffmpeg-remove-asm-re
 Patch4:        https://aur.archlinux.org/cgit/aur.git/plain/ffmpeg-7.patch?h=stepmania#/stepmania-ffmeg-frame-num.patch
 Patch5:        stepmania-long-musicwheel.patch
 
+# The code doesn’t recognize the ppc64le architecture
+# archutils/Common/PthreadHelpers.cpp:251:2  error: #error GetThreadBacktraceContext: which arch?
+ExcludeArch:   ppc64le
+
 BuildRequires: gcc-c++
 BuildRequires: cmake
 BuildRequires: desktop-file-utils
@@ -129,6 +133,7 @@ EOF
 - Mark main license file with %%license tag
 - Move docs into %%{_docdir}
 - Remove %%attr tags
+- Add ExcludeArch for ppc64le
 
 * Thu Mar 20 2025 Jan "Yenya" Kasprzak <kas@yenya.net> - 5.1.0~20250110gitd55acb1-4
 - Pre-release style version tag
