@@ -3,6 +3,7 @@ Name:          stepmania
 %global        forgeurl https://github.com/stepmania/stepmania
 %global        version0 5.1.0
 %global        commit   d55acb1ba26f1c5b5e3048d6d6c0bd116625216f
+%global        date     20221114
 
 %forgemeta
 
