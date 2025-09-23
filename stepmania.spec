@@ -130,20 +130,21 @@ EOF
 %doc %{_docdir}/%{name}/Docs
 
 %changelog
-* Wed Jul 16 2025 Jan "Yenya" Kasprzak <kas@yenya.net> - 5.1.0~20250110gitd55acb1-5
+* Wed Jul 16 2025 Jan "Yenya" Kasprzak <kas@yenya.net> - 5.1.0~20221114gitd55acb1-5
 - Mark main license file with %%license tag
 - Move docs into %%{_docdir}
 - Remove %%attr tags
 - Add ExcludeArch for ppc64le
+- Set date of the last commit (20221114) instead of guessing the snapshot date,
 
-* Thu Mar 20 2025 Jan "Yenya" Kasprzak <kas@yenya.net> - 5.1.0~20250110gitd55acb1-4
+* Thu Mar 20 2025 Jan "Yenya" Kasprzak <kas@yenya.net> - 5.1.0~20221114gitd55acb1-4
 - Pre-release style version tag
 
-* Thu Jan 09 2025 Jan "Yenya" Kasprzak <kas@yenya.net> - 5.1.beta-3.20250110gitd55acb1
+* Thu Jan 09 2025 Jan "Yenya" Kasprzak <kas@yenya.net> - 5.1.beta-3.20221114gitd55acb1
 - Build against ffmpeg instead of ffmpeg-free
 
-* Thu Jan 09 2025 Jan "Yenya" Kasprzak <kas@yenya.net> - 5.1.beta-2.20250110gitd55acb1
+* Thu Jan 09 2025 Jan "Yenya" Kasprzak <kas@yenya.net> - 5.1.beta-2.20221114gitd55acb1
 - Updated according to the review (ffmpeg-free, license tag)
 
-* Thu Jan 09 2025 Jan "Yenya" Kasprzak <kas@yenya.net> - 5.1.beta-1.20250110gitd55acb1
+* Thu Jan 09 2025 Jan "Yenya" Kasprzak <kas@yenya.net> - 5.1.beta-1.20221114gitd55acb1
 - Initial RPM release
