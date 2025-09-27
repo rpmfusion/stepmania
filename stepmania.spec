@@ -18,7 +18,7 @@ Name:          stepmania
 %global        the_data_directory %{_libdir}/%{name}-%{main_version}
 
 Version:       %forgeversion -p
-Release:       5%{?dist}
+Release:       6%{?dist}
 Group:         Amusements/Games
 Summary:       Advanced cross-platform rhythm game
 URL:           %{forgeurl}
@@ -118,6 +118,7 @@ cat <<EOF > %{buildroot}%{_bindir}/stepmania
 #!/bin/sh
 exec %{the_data_directory}/stepmania "\$@"
 EOF
+chmod 0755 %{buildroot}%{_bindir}/stepmania
 
 %check
 
@@ -130,6 +131,9 @@ EOF
 %doc %{_docdir}/%{name}/Docs
 
 %changelog
+* Sat Sep 27 2025 Sérgio Basto <sergio@serjux.com> - 5.1.0~20221114gitd55acb1-6
+- Fix permissions of /usr/bin/stepmania
+
 * Wed Jul 16 2025 Jan "Yenya" Kasprzak <kas@yenya.net> - 5.1.0~20221114gitd55acb1-5
 - Mark main license file with %%license tag
 - Move docs into %%{_docdir}
