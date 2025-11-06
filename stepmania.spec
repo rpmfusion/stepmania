@@ -18,7 +18,7 @@ Name:          stepmania
 %global        the_data_directory %{_libdir}/%{name}-%{main_version}
 
 Version:       %forgeversion -p
-Release:       6%{?dist}
+Release:       7%{?dist}
 Group:         Amusements/Games
 Summary:       Advanced cross-platform rhythm game
 URL:           %{forgeurl}
@@ -131,6 +131,9 @@ chmod 0755 %{buildroot}%{_bindir}/stepmania
 %doc %{_docdir}/%{name}/Docs
 
 %changelog
+* Thu Nov 06 2025 Leigh Scott <leigh123linux@gmail.com> - 5.1.0~20221114gitd55acb1-7
+- Rebuild for ffmpeg-8.0
+
 * Sat Sep 27 2025 Sérgio Basto <sergio@serjux.com> - 5.1.0~20221114gitd55acb1-6
 - Fix permissions of /usr/bin/stepmania
 
