@@ -18,7 +18,7 @@ Name:          stepmania
 %global        the_data_directory %{_libdir}/%{name}-%{main_version}
 
 Version:       %forgeversion -p
-Release:       7%{?dist}
+Release:       8%{?dist}
 Group:         Amusements/Games
 Summary:       Advanced cross-platform rhythm game
 URL:           %{forgeurl}
@@ -131,6 +131,9 @@ chmod 0755 %{buildroot}%{_bindir}/stepmania
 %doc %{_docdir}/%{name}/Docs
 
 %changelog
+* Mon Feb 02 2026 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 5.1.0~20221114gitd55acb1-8
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_44_Mass_Rebuild
+
 * Thu Nov 06 2025 Leigh Scott <leigh123linux@gmail.com> - 5.1.0~20221114gitd55acb1-7
 - Rebuild for ffmpeg-8.0
 
