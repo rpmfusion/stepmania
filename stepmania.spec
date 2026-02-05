@@ -17,6 +17,9 @@ Name:          stepmania
 # to have the_data_directory under _libdir:
 %global        the_data_directory %{_libdir}/%{name}-%{main_version}
 
+# Set patch fuzz to 2 so patch 6 succeeds
+%global        _default_patch_fuzz 2
+
 Version:       %forgeversion -p
 Release:       8%{?dist}
 Group:         Amusements/Games
@@ -37,6 +40,7 @@ Patch2:        https://github.com/stepmania/stepmania/commit/3fef5ef60b7674d6431
 Patch3:        https://aur.archlinux.org/cgit/aur.git/plain/ffmpeg-remove-asm-requirement.patch?h=stepmania#/stepmania-remove-ffmpeg-asm-requirement.patch
 Patch4:        https://aur.archlinux.org/cgit/aur.git/plain/ffmpeg-7.patch?h=stepmania#/stepmania-ffmeg-frame-num.patch
 Patch5:        stepmania-long-musicwheel.patch
+Patch6:        https://aur.archlinux.org/cgit/aur.git/plain/ffmpeg-8.patch?h=stepmania#/stepmania-ffmeg-avcodec_close-removal.patch
 
 # The code doesn’t recognize the ppc64le architecture
 # archutils/Common/PthreadHelpers.cpp:251:2  error: #error GetThreadBacktraceContext: which arch?
@@ -80,6 +84,7 @@ for creating your own steps.
 %patch 3 -p1 -b .ffmpeg-asm
 %patch 4 -p1 -b .ffmpeg-frame-num
 %patch 5 -p1 -b .long-musicwheel
+%patch 6 -p1 -b .avcodec_close-removal
 
 %build
 %cmake \
