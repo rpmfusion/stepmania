@@ -21,7 +21,7 @@ Name:          stepmania
 %global        _default_patch_fuzz 2
 
 Version:       %forgeversion -p
-Release:       10%{?dist}
+Release:       11%{?dist}
 Group:         Amusements/Games
 Summary:       Advanced cross-platform rhythm game
 URL:           %{forgeurl}
@@ -66,9 +66,10 @@ BuildRequires: libvorbis-devel
 BuildRequires: libXinerama-devel
 BuildRequires: libXrandr-devel
 BuildRequires: libXtst-devel
-BuildRequires: pcre-devel
 BuildRequires: pulseaudio-libs-devel
 BuildRequires: systemd-devel
+
+Provides: bundled(pcre) = 8.45
 
 # from README.md:
 %description
@@ -100,8 +101,9 @@ for creating your own steps.
     -DWITH_SYSTEM_TOMMATH=YES \
     -DWITH_SYSTEM_TOMCRYPT=YES \
     -DWITH_SYSTEM_JSONCPP=YES \
-    -DWITH_SYSTEM_PCRE=YES \
+    -DWITH_SYSTEM_PCRE=OFF \
     -DWITH_SYSTEM_ZLIB=YES \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     -Wno-dev
 
 %cmake_build
@@ -136,6 +138,9 @@ chmod 0755 %{buildroot}%{_bindir}/stepmania
 %doc %{_docdir}/%{name}/Docs
 
 %changelog
+* Tue Aug 04 2026 Leigh Scott <leigh123linux@gmail.com> - 5.1.0~20221114gitd55acb1-11
+- Use bundled pcre lib
+
 * Sun Aug 02 2026 RPM Fusion Release Engineering <leigh123linux@rpmfusion.org> - 5.1.0~20221114gitd55acb1-10
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_45_Mass_Rebuild
 
