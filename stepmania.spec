@@ -21,7 +21,7 @@ Name:          stepmania
 %global        _default_patch_fuzz 2
 
 Version:       %forgeversion -p
-Release:       11%{?dist}
+Release:       12%{?dist}
 Group:         Amusements/Games
 Summary:       Advanced cross-platform rhythm game
 URL:           %{forgeurl}
@@ -41,6 +41,8 @@ Patch3:        https://aur.archlinux.org/cgit/aur.git/plain/ffmpeg-remove-asm-re
 Patch4:        https://aur.archlinux.org/cgit/aur.git/plain/ffmpeg-7.patch?h=stepmania#/stepmania-ffmeg-frame-num.patch
 Patch5:        stepmania-long-musicwheel.patch
 Patch6:        https://aur.archlinux.org/cgit/aur.git/plain/ffmpeg-8.patch?h=stepmania#/stepmania-ffmeg-avcodec_close-removal.patch
+# Fix amateur upstream mistake, bundled pcre must be static!!
+Patch7:        make_pcre_static.patch
 
 # The code doesn’t recognize the ppc64le architecture
 # archutils/Common/PthreadHelpers.cpp:251:2  error: #error GetThreadBacktraceContext: which arch?
@@ -86,6 +88,7 @@ for creating your own steps.
 %patch 4 -p1 -b .ffmpeg-frame-num
 %patch 5 -p1 -b .long-musicwheel
 %patch 6 -p1 -b .avcodec_close-removal
+%patch 7 -p1 -b .make_pcre_static
 
 %build
 %cmake \
@@ -138,6 +141,9 @@ chmod 0755 %{buildroot}%{_bindir}/stepmania
 %doc %{_docdir}/%{name}/Docs
 
 %changelog
+* Fri Aug 14 2026 Leigh Scott <leigh123linux@gmail.com> - 5.1.0~20221114gitd55acb1-12
+- Fix amateur upstream mistake, bundled pcre must be static!!
+
 * Tue Aug 04 2026 Leigh Scott <leigh123linux@gmail.com> - 5.1.0~20221114gitd55acb1-11
 - Use bundled pcre lib
 
