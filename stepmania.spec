@@ -21,7 +21,7 @@ Name:          stepmania
 %global        _default_patch_fuzz 2
 
 Version:       %forgeversion -p
-Release:       12%{?dist}
+Release:       13%{?dist}
 Group:         Amusements/Games
 Summary:       Advanced cross-platform rhythm game
 URL:           %{forgeurl}
@@ -141,6 +141,9 @@ chmod 0755 %{buildroot}%{_bindir}/stepmania
 %doc %{_docdir}/%{name}/Docs
 
 %changelog
+* Sat Aug 22 2026 Leigh Scott <leigh123linux@gmail.com> - 5.1.0~20221114gitd55acb1-13
+- Rebuild for new ffmpeg
+
 * Fri Aug 14 2026 Leigh Scott <leigh123linux@gmail.com> - 5.1.0~20221114gitd55acb1-12
 - Fix amateur upstream mistake, bundled pcre must be static!!
 
