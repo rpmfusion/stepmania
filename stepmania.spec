@@ -21,7 +21,7 @@ Name:          stepmania
 %global        _default_patch_fuzz 2
 
 Version:       %forgeversion -p
-Release:       13%{?dist}
+Release:       14%{?dist}
 Group:         Amusements/Games
 Summary:       Advanced cross-platform rhythm game
 URL:           %{forgeurl}
@@ -41,8 +41,7 @@ Patch3:        https://aur.archlinux.org/cgit/aur.git/plain/ffmpeg-remove-asm-re
 Patch4:        https://aur.archlinux.org/cgit/aur.git/plain/ffmpeg-7.patch?h=stepmania#/stepmania-ffmeg-frame-num.patch
 Patch5:        stepmania-long-musicwheel.patch
 Patch6:        https://aur.archlinux.org/cgit/aur.git/plain/ffmpeg-8.patch?h=stepmania#/stepmania-ffmeg-avcodec_close-removal.patch
-# Fix amateur upstream mistake, bundled pcre must be static!!
-Patch7:        make_pcre_static.patch
+Patch7:		stepmania-pcre2.patch
 
 # The code doesn’t recognize the ppc64le architecture
 # archutils/Common/PthreadHelpers.cpp:251:2  error: #error GetThreadBacktraceContext: which arch?
@@ -68,10 +67,9 @@ BuildRequires: libvorbis-devel
 BuildRequires: libXinerama-devel
 BuildRequires: libXrandr-devel
 BuildRequires: libXtst-devel
+BuildRequires: pcre2-devel
 BuildRequires: pulseaudio-libs-devel
 BuildRequires: systemd-devel
-
-Provides: bundled(pcre) = 8.45
 
 # from README.md:
 %description
@@ -88,10 +86,11 @@ for creating your own steps.
 %patch 4 -p1 -b .ffmpeg-frame-num
 %patch 5 -p1 -b .long-musicwheel
 %patch 6 -p1 -b .avcodec_close-removal
-%patch 7 -p1 -b .make_pcre_static
+%patch 7 -p1 -b .pcre2
 
 %build
 %cmake \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     -DCMAKE_INSTALL_PREFIX=%{_libdir} \
     -DWITH_FULL_RELEASE=YES \
     -DWITH_PORTABLE_TOMCRYPT=NO \
@@ -104,9 +103,8 @@ for creating your own steps.
     -DWITH_SYSTEM_TOMMATH=YES \
     -DWITH_SYSTEM_TOMCRYPT=YES \
     -DWITH_SYSTEM_JSONCPP=YES \
-    -DWITH_SYSTEM_PCRE=OFF \
     -DWITH_SYSTEM_ZLIB=YES \
-    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
+    -DWITH_SYSTEM_PCRE=YES \
     -Wno-dev
 
 %cmake_build
@@ -141,6 +139,9 @@ chmod 0755 %{buildroot}%{_bindir}/stepmania
 %doc %{_docdir}/%{name}/Docs
 
 %changelog
+* Wed Aug 26 2026 Jan "Yenya" Kasprzak <kas@yenya.net> - 5.1.0~20221114gitd55acb1-14
+- LLM-assisted patch for using PCRE2 instead of PCREv1
+
 * Sat Aug 22 2026 Leigh Scott <leigh123linux@gmail.com> - 5.1.0~20221114gitd55acb1-13
 - Rebuild for new ffmpeg
 
