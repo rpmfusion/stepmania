@@ -1,0 +1,31 @@
+#
+# This fixes crash for animated song banners and static background to video
+# transitions in Fedora 44+ ffmpeg.
+#
+# Created by Jan "Yenya" Kasprzak, LLM assisted by Kimi-3
+#
+
+--- a/src/arch/MovieTexture/MovieTexture_FFMpeg.cpp
++++ b/src/arch/MovieTexture/MovieTexture_FFMpeg.cpp
+@@ -507,8 +507,21 @@
+ 	m_fLastFrame = 0;
+ 
+ 	ASSERT( m_pStream != nullptr );
++#if LIBAVCODEC_VERSION_MAJOR >= 58
++	/* avcodec_free_context() resets m_pStreamCodec to NULL; reallocate it from
++	 * the stream parameters before it is used below, otherwise rewinding a
++	 * movie (e.g. a looping banner) dereferences a NULL pointer. */
++	if( m_pStreamCodec != nullptr )
++		avcodec::avcodec_free_context( &m_pStreamCodec );
++	m_pStreamCodec = avcodec::avcodec_alloc_context3( nullptr );
++	if( m_pStreamCodec == nullptr )
++		return RString( "Couldn't allocate codec context" );
++	if( avcodec::avcodec_parameters_to_context( m_pStreamCodec, m_pStream->codecpar ) < 0 )
++		return RString( "Could not get context from parameters" );
++#else
+ 	if( m_pStreamCodec->codec )
+ 		avcodec::avcodec_free_context( &m_pStreamCodec );
++#endif
+ 
+ 	const avcodec::AVCodec *pCodec = avcodec::avcodec_find_decoder( m_pStreamCodec->codec_id );
+ 	if( pCodec == nullptr )

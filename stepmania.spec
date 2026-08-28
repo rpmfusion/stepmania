@@ -21,7 +21,7 @@ Name:          stepmania
 %global        _default_patch_fuzz 2
 
 Version:       %forgeversion -p
-Release:       14%{?dist}
+Release:       15%{?dist}
 Group:         Amusements/Games
 Summary:       Advanced cross-platform rhythm game
 URL:           %{forgeurl}
@@ -42,6 +42,7 @@ Patch4:        https://aur.archlinux.org/cgit/aur.git/plain/ffmpeg-7.patch?h=ste
 Patch5:        stepmania-long-musicwheel.patch
 Patch6:        https://aur.archlinux.org/cgit/aur.git/plain/ffmpeg-8.patch?h=stepmania#/stepmania-ffmeg-avcodec_close-removal.patch
 Patch7:		stepmania-pcre2.patch
+Patch8:		stepmania-fix-banner-rewind-crash.patch
 
 # The code doesn’t recognize the ppc64le architecture
 # archutils/Common/PthreadHelpers.cpp:251:2  error: #error GetThreadBacktraceContext: which arch?
@@ -87,6 +88,7 @@ for creating your own steps.
 %patch 5 -p1 -b .long-musicwheel
 %patch 6 -p1 -b .avcodec_close-removal
 %patch 7 -p1 -b .pcre2
+%patch 8 -p1 -b .banner
 
 %build
 %cmake \
@@ -139,6 +141,9 @@ chmod 0755 %{buildroot}%{_bindir}/stepmania
 %doc %{_docdir}/%{name}/Docs
 
 %changelog
+* Thu Aug 27 2026 Jan "Yenya" Kasprzak <kas@yenya.net> - 5.1.0~20221114gitd55acb1-15
+- LLM-assisted fix for crash in animated banners and image-to-video transitions
+
 * Wed Aug 26 2026 Jan "Yenya" Kasprzak <kas@yenya.net> - 5.1.0~20221114gitd55acb1-14
 - LLM-assisted patch for using PCRE2 instead of PCREv1
 
