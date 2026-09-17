@@ -21,7 +21,7 @@ Name:          stepmania
 %global        _default_patch_fuzz 2
 
 Version:       %forgeversion -p
-Release:       15%{?dist}
+Release:       16%{?dist}
 Group:         Amusements/Games
 Summary:       Advanced cross-platform rhythm game
 URL:           %{forgeurl}
@@ -141,6 +141,9 @@ chmod 0755 %{buildroot}%{_bindir}/stepmania
 %doc %{_docdir}/%{name}/Docs
 
 %changelog
+* Thu Sep 17 2026 Leigh Scott <leigh123linux@gmail.com> - 5.1.0~20221114gitd55acb1-16
+- Rebuild for f45 ffmpeg9
+
 * Thu Aug 27 2026 Jan "Yenya" Kasprzak <kas@yenya.net> - 5.1.0~20221114gitd55acb1-15
 - LLM-assisted fix for crash in animated banners and image-to-video transitions
 
